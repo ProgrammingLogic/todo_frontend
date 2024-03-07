@@ -3,6 +3,15 @@ import "./App.css";
 
 
 function App(props) {
+  const taskList = props.tasks?.map((task) => 
+    <Todo 
+      id={task.id}
+      name={task.name} 
+      completed={task.completed}
+    />
+  );
+
+
   return (
     <>
       <div className="todoapp stack-large">
@@ -57,9 +66,7 @@ function App(props) {
           className="todo-list stack-large stack-exception"
           aria-labelledby="list-heading"
         >
-          <Todo name="Eat" completed />
-          <Todo name="Sleep"/>
-          <Todo name="Repeat"/>
+          {taskList}
         </ul>
       </div> 
     </>
