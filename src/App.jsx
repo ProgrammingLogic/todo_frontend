@@ -1,3 +1,4 @@
+import Todo from "./components/Todo";
 import "./App.css";
 
 
@@ -48,6 +49,18 @@ function App(props) {
             <span className="visually-hidden"> Tasks</span>
           </button>
         </div>
+
+
+        <h2 id="list-heading">3 tasks remaining</h2>
+        <ul
+          role="list"
+          className="todo-list stack-large stack-exception"
+          aria-labelledby="list-heading"
+        >
+          <Todo />
+          <Todo />
+          <Todo />
+        </ul>
       </div> 
     </>
   )
