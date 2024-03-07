@@ -8,6 +8,7 @@ function App(props) {
       id={task.id}
       name={task.name} 
       completed={task.completed}
+      key={task.id}
     />
   );
 
