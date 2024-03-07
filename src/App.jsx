@@ -14,6 +14,7 @@ function App(props) {
     />
   );
 
+  let filter = "All";
 
   return (
     <>
@@ -22,7 +23,13 @@ function App(props) {
 
         <Form />
 
-        <FilterButton />
+
+        <div className="filters btn-group stack-exception">
+          <FilterButton name="All" filter={filter}/>
+          <FilterButton name="Active" filter={filter}/>
+          <FilterButton name="Completed" filter={filter}/>
+        </div>
+
 
         <h2 id="list-heading">3 tasks remaining</h2>
         <ul
