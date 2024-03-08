@@ -14,6 +14,13 @@ function App(props) {
     />
   );
 
+
+  function addTask(name) {
+    alert(name);
+  }
+
+
+
   let filter = "All";
 
   return (
@@ -21,7 +28,7 @@ function App(props) {
       <div className="todoapp stack-large">
         <h1>To-Do App</h1>   
 
-        <Form />
+        <Form addTask={addTask}/>
 
 
         <div className="filters btn-group stack-exception">
