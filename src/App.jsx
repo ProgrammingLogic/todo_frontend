@@ -9,12 +9,25 @@ import "./App.css";
 function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
 
+
+  function toggleTaskCompleted(id) {
+    const updatedTasks = tasks.map((task) => {
+      if (id === task.id) {
+        return { ...task, completed: !task.completed };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  }
+
+
   const taskList = tasks?.map((task) => (
     <Todo 
       id={task.id}
       name={task.name} 
       completed={task.completed}
       key={task.id}
+      toggleTaskCompleted={toggleTaskCompleted}
     />
   ));
 
@@ -23,7 +36,6 @@ function App(props) {
     const newTask = { id: `todo-${nanoid()}`, name, completed: false };
     setTasks([...tasks, newTask])
   }
-
 
 
   let filter = "All";
