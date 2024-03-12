@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 function Todo(props) {
     const [isEditing, setEditing] = useState(false);
     const [newName, setNewName] = useState("");
+    const editFieldRef = useRef(null);
+    const editButtonRef = useRef(null);
 
 
     function handleChange(e) {
@@ -60,6 +62,7 @@ function Todo(props) {
                         type="checkbox"
                         defaultChecked={props.completed} 
                         onChange={() => props.toggleTaskCompleted(props.id)}
+                        ref={editFieldRef}
                     />
 
 
@@ -85,6 +88,23 @@ function Todo(props) {
         </>
     );
 
+
+    // useEffect only runs when [isEditing] is updated
+    // you can add more variables to [isEditing], so more variables
+    //  can be watched
+    // TODO
+    //  finish mozilla guide
+    //  left off at: https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_accessibility#moving_focus_back_to_the_edit_button
+    useEffect(() => {
+        if (isEditing) {
+            editFieldRef.current.focus();
+        }
+        else {
+            editButtonRef.current.focus();
+        }
+    }, [isEditing]);
+
+    console.log("main render");
     return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>
 }
 
