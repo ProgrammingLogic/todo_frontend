@@ -94,12 +94,6 @@ function Todo(props) {
     );
 
 
-    // useEffect only runs when [isEditing] is updated
-    // you can add more variables to [isEditing], so more variables
-    //  can be watched
-    // TODO
-    //  finish mozilla guide
-    //  left off at: https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_accessibility#moving_focus_back_to_the_edit_button
     useEffect(() => {
         if (isEditing) {
             editFieldRef.current.focus();
