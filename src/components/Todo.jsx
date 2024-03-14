@@ -35,6 +35,7 @@ function Todo(props) {
                         type="text"
                         value={newName}
                         onChange={handleChange}
+                        ref={editFieldRef}
                     />
                 </div>
 
@@ -62,7 +63,6 @@ function Todo(props) {
                         type="checkbox"
                         defaultChecked={props.completed} 
                         onChange={() => props.toggleTaskCompleted(props.id)}
-                        ref={editFieldRef}
                     />
 
 
@@ -72,7 +72,12 @@ function Todo(props) {
                 </div>
 
                 <div className="btn-group">
-                    <button type="button" className="btn" onClick={() => setEditing(true)}>
+                    <button 
+                        type="button"
+                        className="btn"
+                        onClick={() => setEditing(true)}
+                        ref={editButtonRef}
+                    >
                         Edit <span className="visually-hidden">{props.name}</span>
                     </button>
 
