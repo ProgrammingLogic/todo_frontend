@@ -32,13 +32,13 @@ function Tasks(props) {
         setStatusFilter(filter);
     }
 
-    const statusFilterOptions = FILTER_NAMES.map((name) => {
+    const statusFilterOptions = FILTER_NAMES.map((name) => {(
         <option
             value={name}
         >
             {name}
         </option>
-    });
+    )});
 
     const statusFilterDropdown = (
         <div>
