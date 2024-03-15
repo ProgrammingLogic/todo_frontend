@@ -13,49 +13,57 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 // props.tasks == current list of tasks
 function Tasks(props) {
     const [statusFilter, setStatusFilter] = useState("All");
-    const [nameFilter, setNameFilter] = useState("");
+    // const [nameFilter, setNameFilter] = useState("");
     const [tasks, setTasks] = useState(props.TaskList);
 
-    const nameFilterSearchBox = (
-        <input
-            type="text"
-            id="new-todo-input"
-            className="input input__lg"
-            name="text"
-            autoComplete="off"
-            value={nameFilter}
-            onChange={(event) => {setNameFilter(event.target.value)}}
-        />
-    );
+    // const nameFilterSearchBox = (
+    //     <input
+    //         type="text"
+    //         id="new-todo-input"
+    //         className="input input__lg"
+    //         name="text"
+    //         autoComplete="off"
+    //         value={nameFilter}
+    //         onChange={(event) => {setNameFilter(event.target.value)}}
+    //     />
+    // );
 
     function updateStatusFilter(filter) { 
         setStatusFilter(filter);
     }
 
-    const statusFilterOptions = FILTER_NAMES.map((name) => {(
-        <option
-            value={name}
-        >
-            {name}
-        </option>
-    )});
+    // const statusFilterOptions = FILTER_NAMES.map((name) => {(
+    //     <option
+    //         value={name}
+    //     >
+    //         {name}
+    //     </option>
+    // )});
+
+    const filterOptions = FILTER_NAMES.map((name) => (
+        <h1>{name}</h1>
+    ));
 
     const statusFilterDropdown = (
-        <div>
-           <select
-                name="statusFilter" 
-                onChange={(event) => {setStatusFilter(event.target.value)}}
-           >
-                {statusFilterOptions} 
-            </select> 
-        </div>
+                // <option value={name}>
+                //     {name}
+                // </option>
+        <select>
+        </select>
+        // <div>
+        //    <select
+        //         name="statusFilter" 
+        //         onChange={(event) => {setStatusFilter(event.target.value)}}
+        //    >
+        //         {statusFilterOptions} 
+        //     </select> 
+        // </div>
     );
         
     return (
         <>
             <div>
                 {statusFilterDropdown}
-                {nameFilterSearchBox}
             </div>
             
             <div>
