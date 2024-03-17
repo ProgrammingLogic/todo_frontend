@@ -2,6 +2,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import List from "@mui/material/List";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 
 import { UseState, useState } from "react";
 
@@ -48,10 +50,10 @@ export default function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <h1>Todo List</h1>
-      <List>
-        {tasks}
-      </List>
+        <Stack alignItems="center" spacing={1}>
+          <h1>Todo List</h1>
+          {tasks}
+        </Stack>
     </ThemeProvider>
   )
 }
