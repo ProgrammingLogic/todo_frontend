@@ -5,7 +5,7 @@ import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
-import { UseState, useState } from "react";
+import { useState } from "react";
 
 import Task from "./components/Task";
 
@@ -43,8 +43,24 @@ export default function App() {
     setTaskList(newTaskList);
   }
 
+  function editTask(key, newName) {
+    const newTaskList = taskList.map((task) => {
+      if (task.key === key) {
+        return {...task, name: newName};
+      }
+      return task;
+    });
+
+    setTaskList(newTaskList);
+  }
+
+  function deleteTask(key) {
+    const newTaskList = tasks.filter((task) => key != task.key);
+    setTaskList(newTaskList);
+  }
+
   const tasks = taskList.map((task) => 
-    <Task key={task.key} task={task} completeTask={completeTask}/>
+    <Task key={task.key} task={task} completeTask={completeTask} editTask={editTask} deleteTask={deleteTask}/>
   );
 
   return (
