@@ -22,6 +22,8 @@ const SAMPLE_TASKS = [
   {"key": 10, name: "I am task #10", completed: false},
 ];
 
+const backendURI = "http://localhost:5120";
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark"
@@ -31,6 +33,29 @@ const darkTheme = createTheme({
 
 export default function App() {
   const [taskList, setTaskList] = useState(SAMPLE_TASKS);
+
+  function getTasks() {
+    fetch(`${backendURI}/api/TodoItems`, {
+      method: "",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(response => response.json())
+      .foreach((task) => {
+        const newTaskList = taskList.append(
+          {
+            "key": task.id,
+            "name": task.name,
+            "completed": task.isComplete,
+          }
+        )
+
+        setTaskList(newTaskList);
+      })
+
+  }
 
   function completeTask(key) {
     const newTaskList = taskList.map((task) => {
