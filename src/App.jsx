@@ -5,7 +5,7 @@ import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Task from "./components/Task";
 
@@ -22,7 +22,27 @@ const SAMPLE_TASKS = [
   {"key": 10, name: "I am task #10", completed: false},
 ];
 
-const backendURI = "http://localhost:5120";
+const backendURI = "";
+
+function getTasks() {
+  let tasks = [];
+
+  fetch(`${backendURI}`, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then(response => response.json())
+    .foreach((task) => {tasks.append({
+       "key": task.id,
+       "name": task.name,
+       "completed": task.isComplete, 
+    })});
+
+    return tasks;
+}
 
 const darkTheme = createTheme({
   palette: {
@@ -32,30 +52,29 @@ const darkTheme = createTheme({
 
 
 export default function App() {
-  const [taskList, setTaskList] = useState(SAMPLE_TASKS);
+  const [taskList, setTaskList] = useState(null);
 
-  function getTasks() {
-    fetch(`${backendURI}/api/TodoItems`, {
-      method: "",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      },
+  useEffect(() => {
+    fetch("http://localhost:5120/api/TodoItems", {
+      "method": "GET",
     })
-      .then(response => response.json())
-      .foreach((task) => {
-        const newTaskList = taskList.append(
-          {
-            "key": task.id,
-            "name": task.name,
-            "completed": task.isComplete,
-          }
-        )
+      .then((response) => console.log(response));
+      // .then(response => response.json())
+      // .then((data) => {
+      //   console.log(data); 
+      //   // const newTaskList = data.foreach((task) => {
+      //   //   return {
+      //   //     "id": task.key,
+      //   //     "name": task.name,
+      //   //     "completed": task.isComplete,
+      //   //   }
+      //   // });
 
-        setTaskList(newTaskList);
-      })
+      //   // setTaskList(newTaskList);
+      // })
+      // .catch(error => console.error(error))
+  }, [taskList]);
 
-  }
 
   function completeTask(key) {
     const newTaskList = taskList.map((task) => {
@@ -84,8 +103,14 @@ export default function App() {
     setTaskList(newTaskList);
   }
 
-  const tasks = taskList.map((task) => 
-    <Task key={task.key} task={task} completeTask={completeTask} editTask={editTask} deleteTask={deleteTask}/>
+  const tasks = taskList == null ? null : taskList.map((task) => 
+    <Task 
+      key={task.key} 
+      task={task} 
+      completeTask={completeTask}
+      editTask={editTask}
+      deleteTask={deleteTask}
+    />
   );
 
   return (
