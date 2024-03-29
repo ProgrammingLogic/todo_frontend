@@ -13,6 +13,7 @@ import Stack from "@mui/material/Stack";
 // - Move task list handling into a file named TaskList.jsx
 export default function Tasks() {
   const [data, setData] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     fetchTasks();
@@ -27,6 +28,15 @@ export default function Tasks() {
     ];
 
     setData(tasksData);
+    setTasks(data.map(task) => {
+        <Task 
+            id={task.id}
+            name={task.name}
+            completed={task.completed}
+            handleUpdate={handleUpdate}
+            handleDelete={handleDelete}
+        />
+    });
   };
 
   // item.id -- The ID of the task
@@ -37,8 +47,8 @@ export default function Tasks() {
     setData([...data, newItem]);
   };
 
-  const handleUpdate = (newItem) => {
-    const newData = data.map((item) => item.id === newItem.id ? newItem : item);
+  const handleUpdate = (id, newName) => {
+    const newData = data.map((item) => item.id === id ? {...item, name: newName} : item);
     setData(newData);
   };
 
