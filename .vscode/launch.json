@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Build",
+            "command": "npm install",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "type": "node",
+            "cwd": "${workspaceFolder}",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "dev",
+                "--",
+                "--open",
+                "--port",
+                "3000"
+            ],
+            "restart": false,
+            "timeout": 5000
+        },
+    ]
+}
