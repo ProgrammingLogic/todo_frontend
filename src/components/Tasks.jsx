@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 
+import Stack from "@mui/material/Stack";
+
+import TaskList from "./TaskList";
+
 
 // SOURCE: https://learn.microsoft.com/en-us/training/modules/build-web-api-minimal-spa/3-exercise-create-front-end?tabs=github-codespaces
 // 
@@ -46,6 +50,9 @@ export default function Tasks() {
   }
 
   return (
-    <h1>Tasks</h1>
+    <Stack alignItems="center" spacing={1}>
+        <h1>Tasks</h1>
+        <TaskList />
+    </Stack>
   )
 }
