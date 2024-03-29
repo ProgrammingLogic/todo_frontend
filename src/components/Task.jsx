@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import IconButton from '@mui/material/IconButton';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -11,18 +10,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from "@mui/material/TextField"
 
 
-export default function Task(props) {
-    const task = props.task;
-
+export default function Task({id, name, completed, onUpdate, onDelete}) {
     const [editing, setEditing] = useState(false);
-    const [name, setName] = useState(task.name);
 
     const editingView = (
         <>
             <TextField 
                 variant="filled"
                 defaultValue={name}
-                onChange={(event) => setName(event.target.value)}
+                onChange={(event) => (event.target.value)}
             />
 
             <IconButton
