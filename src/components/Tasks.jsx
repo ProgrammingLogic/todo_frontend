@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import Stack from "@mui/material/Stack";
 
+import Task from "./Task";
+
 
 // SOURCE: https://learn.microsoft.com/en-us/training/modules/build-web-api-minimal-spa/3-exercise-create-front-end?tabs=github-codespaces
 // 
@@ -28,15 +30,16 @@ export default function Tasks() {
     ];
 
     setData(tasksData);
-    setTasks(data.map(task) => {
+    setTasks(data.map(task => {
         <Task 
             id={task.id}
             name={task.name}
             completed={task.completed}
             handleUpdate={handleUpdate}
             handleDelete={handleDelete}
+            handleComplet={handleComplete}
         />
-    });
+    }));
   };
 
   // item.id -- The ID of the task
@@ -54,6 +57,11 @@ export default function Tasks() {
 
   const handleDelete = (id) => {
     const newData = data.map(item => item !== id);
+    setData(newData);
+  }
+
+  const handleComplete = (id) => {
+    const newData = data.map((item) => item.id === id ? {...item, completed: !item.completed} : item);
     setData(newData);
   }
 

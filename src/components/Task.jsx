@@ -10,20 +10,21 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from "@mui/material/TextField"
 
 
-export default function Task({id, name, completed, onUpdate, onDelete}) {
+export default function Task({id, name, completed, onUpdate, onDelete, onComplete}) {
     const [editing, setEditing] = useState(false);
+    const [ nameField, setNameField ] = useState(name);
 
     const editingView = (
         <>
             <TextField 
                 variant="filled"
-                defaultValue={name}
-                onChange={(event) => (event.target.value)}
+                defaultValue={nameField}
+                onChange={(event) => (setNameField(event.target.value))}
             />
 
             <IconButton
                 onClick={() => {
-                    props.editTask(task.key, name);
+                    onUpdate(id, nameField)
                     setEditing(false);
                 }} 
             >
@@ -32,7 +33,7 @@ export default function Task({id, name, completed, onUpdate, onDelete}) {
             
             <IconButton 
                 onClick={() => {
-                    setName(task.name);
+                    setNameField(name);
                     setEditing(false);
                 }}
             >
@@ -41,7 +42,7 @@ export default function Task({id, name, completed, onUpdate, onDelete}) {
 
             <IconButton
                 onClick={() => {
-                    props.deleteTask(task.key);
+                    onDelete(id);
                 }} 
             >
                 <DeleteIcon />
@@ -63,8 +64,8 @@ export default function Task({id, name, completed, onUpdate, onDelete}) {
         <Stack direction="row" spacing={1} alignItems="center">
             <Checkbox 
                 edge="start"
-                checked={task.completed || false}
-                onChange={() => props.completeTask(task.key)}
+                checked={completed || false}
+                onChange={() => onComplete(id)}
             />
 
             {editing ? editingView : readingView}
